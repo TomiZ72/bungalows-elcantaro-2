@@ -889,7 +889,7 @@ select {
 
     margin-top: 2rem;
     padding: 1.75rem 0;
-
+    color: var(--color-green-900);
     background: transparent;
     border-radius: 0;
     border-top: 1px solid var(--color-border);
