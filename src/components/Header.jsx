@@ -56,6 +56,14 @@ const Header = () => {
                     >
                         Bungalows
                     </NavLink>
+                    <NavLink
+                        to="/nosotros"
+                        className="header-link"
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        Nosotros
+                    </NavLink>
+
 
                     <NavLink
                         to="/contacto"
