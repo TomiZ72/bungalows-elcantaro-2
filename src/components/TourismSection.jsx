@@ -40,7 +40,7 @@ const TourismSection = ({ places }) => {
                         </span>
 
                         <h2 id="tourism-title">
-                            Villa Elisa y sus alrededores
+                            La ciudad y sus alrededores
                         </h2>
 
                         <p>

@@ -37,9 +37,8 @@ const BungalowGallery = () => {
     }, []);
 
     return (
-        <article>
-            <div className='bungalows-section'>
-                <h2 className='bungalows-tittle'>Nuestros Bungalows</h2></div>
+        <section className="bungalow-section">
+            <h2 className='bungalows-tittle'>Nuestros Bungalows</h2>
             <div ref={galleryRef} className="bungalow-photo-grid">
                 {photos.map(({ src, alt, width, height }, index) => (
                     <a
@@ -73,7 +72,7 @@ const BungalowGallery = () => {
                     ))}
                 </ul>
             </section>
-        </article>
+        </section>
     );
 };
 
