@@ -1,10 +1,9 @@
 import { Hero } from '../components/Hero.jsx';
 import { complexData } from '../data/complexData.js';
 import { bungalowsData } from '../data/bungalowsData.js';
-import { bungalowsImg } from '../data/bungalowsData.js';
 import { tourismData } from '../data/tourismData.js'
 import { IntroSection } from '../components/IntroSection.jsx';
-import { BungalowCard } from '../components/BungalowCard.jsx';
+import { BungalowGallery } from '../components/BungalowGallery.jsx';
 import { TourismSection } from '../components/TourismSection.jsx'
 import { ReviewsSection } from '../components/ReviewSection.jsx'
 import { LocationSection } from '../components/LocationSection.jsx';
@@ -12,9 +11,7 @@ import { Footer } from '../components/Footer.jsx'
 
 
 const heroImages = [
-    ...complexData.images,
-
-    ...bungalowsImg.images
+    ...complexData.images
 
 ];
 heroImages.flatMap((image) => {
@@ -33,7 +30,7 @@ const Home = () => {
                 location={`${complexData.location.city}, ${complexData.location.province}`}
             />
             <IntroSection images={heroImages} />
-            <BungalowCard bungalows={bungalowsData} />
+            <BungalowGallery />
             <LocationSection />
             <TourismSection places={tourismData} />
             <ReviewsSection />
