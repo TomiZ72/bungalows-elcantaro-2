@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { motion } from "motion/react";
+
 import {
     FaSwimmingPool,
     FaWifi,
@@ -10,6 +12,26 @@ import {
     FaArrowAltCircleLeft,
     FaArrowAltCircleRight
 } from "react-icons/fa";
+
+const reveal = (delay = 0) => ({
+    initial: {
+        opacity: 0,
+        y: 50
+    },
+    whileInView: {
+        opacity: 1,
+        y: 0
+    },
+    viewport: {
+        once: true,
+        amount: 0.1
+    },
+    transition: {
+        duration: 1,
+        delay,
+        ease: "easeOut"
+    }
+});
 
 const services = [
     { Icon: FaSwimmingPool, label: "Piscina climatizada" },
@@ -26,28 +48,40 @@ const IntroSection = ({ images = [] }) => {
     const changeSlide = (direction) => {
         setActiveIndex((previous) =>
             (previous + direction + images.length) % images.length
-        )
+        );
     };
+
     return (
         <section className="intro-section">
             <div className="intro-container">
+
                 <div className="intro-content">
 
-                    <h2>Tu descanso en Villa Elisa, con piscina climatizada.</h2>
+                    <motion.h2 {...reveal()}>
+                        Tu descanso en Villa Elisa, con piscina climatizada.
+                    </motion.h2>
 
-                    <p> Disfrutá de la tranquilidad, el verde y el placer de relajarte en nuestros bungalows. </p>
+                    <motion.p {...reveal(0.2)}>
+                        Disfrutá de la tranquilidad, el verde y el placer
+                        de relajarte en nuestros bungalows.
+                    </motion.p>
+
                 </div>
+
                 {images.length > 0 && (
-                    <div
+                    <motion.div
                         className="triple-carousel"
                         role="region"
                         aria-label="Fotos del complejo"
                         aria-roledescription="carrusel"
+                        {...reveal(0.3)}
                     >
                         <div className="triple-carousel-track">
+
                             {images.map((image, index) => {
                                 const offset =
-                                    (index - activeIndex + images.length) % images.length;
+                                    (index - activeIndex + images.length)
+                                    % images.length;
 
                                 let slideClass = "is-hidden";
 
@@ -65,14 +99,19 @@ const IntroSection = ({ images = [] }) => {
                                         className={`triple-slide ${slideClass}`}
                                         aria-hidden={index !== activeIndex}
                                     >
-                                        <img src={image.src} alt={image.alt} />
+                                        <img
+                                            src={image.src}
+                                            alt={image.alt}
+                                        />
                                     </figure>
                                 );
                             })}
+
                         </div>
 
                         {images.length > 1 && (
                             <div className="triple-controls">
+
                                 <button
                                     type="button"
                                     onClick={() => changeSlide(-1)}
@@ -81,7 +120,10 @@ const IntroSection = ({ images = [] }) => {
                                     <FaArrowAltCircleLeft />
                                 </button>
 
-                                <span aria-live="polite" aria-atomic="true">
+                                <span
+                                    aria-live="polite"
+                                    aria-atomic="true"
+                                >
                                     {activeIndex + 1} / {images.length}
                                 </span>
 
@@ -92,42 +134,69 @@ const IntroSection = ({ images = [] }) => {
                                 >
                                     <FaArrowAltCircleRight />
                                 </button>
+
                             </div>
                         )}
-                    </div>
+
+                    </motion.div>
                 )}
-                <ul className="intro-services-bar" aria-label="Servicios del complejo">
-                    {services.map(({ Icon, label }) => (
-                        <li key={label}>
+
+                <ul
+                    className="intro-services-bar"
+                    aria-label="Servicios del complejo"
+                >
+                    {services.map(({ Icon, label }, index) => (
+                        <motion.li
+                            key={label}
+                            {...reveal(index * 0.15)}
+                        >
                             <Icon aria-hidden="true" />
                             <span>{label}</span>
-                        </li>
+                        </motion.li>
                     ))}
                 </ul>
+
                 <div className="intro-highlights">
-                    <article className="highlight">
-                        <Link to="/bungalows" className="highlight-link">
+
+                    <motion.article
+                        className="highlight"
+                        {...reveal()}
+                    >
+                        <Link
+                            to="/bungalows"
+                            className="highlight-link"
+                        >
                             <strong>Bungalows</strong>
                             <span>Hasta 4 huéspedes</span>
                         </Link>
-                    </article>
+                    </motion.article>
 
-                    <article className="highlight">
+                    <motion.article
+                        className="highlight"
+                        {...reveal(0.2)}
+                    >
                         <strong>Nosotros</strong>
                         <span>Conocénos más</span>
-                    </article>
+                    </motion.article>
 
-                    <article className="highlight">
-                        <a href="#tourism" className="highlight-link">
+                    <motion.article
+                        className="highlight"
+                        {...reveal(0.4)}
+                    >
+                        <a
+                            href="#tourism"
+                            className="highlight-link"
+                        >
                             <strong>Villa Elisa</strong>
                             <span>Entre Ríos</span>
                         </a>
-                    </article>
+                    </motion.article>
 
                 </div>
+
             </div>
         </section>
-    )
-}
+    );
+};
 
-export { IntroSection }
+export { IntroSection };
